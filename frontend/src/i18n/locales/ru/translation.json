@@ -1,0 +1,19 @@
+{
+  "appTitle": "Инвентарь",
+  "nav": {
+    "orders": "Приход",
+    "products": "Продукты",
+    "users": "Пользователи",
+    "settings": "Настройки"
+  },
+  "topMenu": {
+    "searchPlaceholder": "Поиск...",
+    "activeSessions": "Активные сессии"
+  },
+  "ordersPage": {
+    "title": "Приходы"
+  },
+  "productsPage": {
+    "title": "Продукты"
+  }
+}

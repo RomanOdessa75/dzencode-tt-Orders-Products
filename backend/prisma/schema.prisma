@@ -1,0 +1,68 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int      @id @default(autoincrement())
+  email         String   @unique
+  password_hash String
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  @@map("Users")
+}
+
+model Order {
+  id          Int        @id @default(autoincrement())
+  title       String
+  orderDate   DateTime   @map("order_date")
+  description String?
+  products    Product[]
+
+  @@map("Orders")
+}
+
+model Product {
+  id            Int      @id @default(autoincrement())
+  serialNumber  Int      @map("serial_number")
+  isNew         Boolean  @map("is_new") @default(true)
+  photo         String?
+  title         String
+  type          String?
+  specification String?
+  orderId       Int      @map("order_id")
+  productDate   DateTime @map("product_date")
+
+  order         Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  guarantee     ProductGuarantee?
+  prices        ProductPrice[]
+
+  @@map("Products")
+}
+
+model ProductGuarantee {
+  id        Int      @id @default(autoincrement())
+  productId Int      @unique @map("product_id")
+  startDate DateTime @map("start_date")
+  endDate   DateTime @map("end_date")
+
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@map("ProductGuarantees")
+}
+
+model ProductPrice {
+  id         Int     @id @default(autoincrement())
+  productId  Int     @map("product_id")
+  value      Decimal @db.Decimal(10, 2)
+  symbol     String  @db.VarChar(3)
+  isDefault  Boolean @map("is_default") @default(false)
+
+  product    Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@map("ProductPrices")
+}

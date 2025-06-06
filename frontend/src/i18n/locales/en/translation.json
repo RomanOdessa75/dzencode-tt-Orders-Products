@@ -1,0 +1,19 @@
+{
+  "appTitle": "Inventory",
+  "nav": {
+    "orders": "Orders",
+    "products": "Products",
+    "users": "Users",
+    "settings": "Settings"
+  },
+  "topMenu": {
+    "searchPlaceholder": "Search...",
+    "activeSessions": "Active Sessions"
+  },
+  "ordersPage": {
+    "title": "Orders"
+  },
+  "productsPage": {
+    "title": "Products"
+  }
+}
