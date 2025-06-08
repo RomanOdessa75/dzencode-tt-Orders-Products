@@ -43,6 +43,7 @@ services:
       - mysql_db
     ports:
       - "3001:3001"
+    command: sh -c "npm install && npm run build && npm run start"
 
   frontend:
     build: ./frontend
