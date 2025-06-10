@@ -18,7 +18,6 @@ const JWT_SECRET = process.env.JWT_SECRET || "supersecret";
 
 app.use(
   cors({
-    // origin: "http://localhost:3000",
     origin: [
       "https://dzencode-tt-orders-products.vercel.app",
       "http://localhost:3000",
@@ -219,7 +218,12 @@ const registerHandler: RequestHandler = async (req: Request, res: Response) => {
     const user = await prisma.user.create({ data: { email, password_hash } });
     res.status(201).json({ id: user.id, email: user.email });
   } catch (error) {
-    res.status(500).json({ error: "Registration failed" });
+    // res.status(500).json({ error: "Registration failed" });
+    console.error("Error in /api/auth/register:", error);
+    res.status(500).json({
+      error: "Registration failed",
+      details: (error as Error).message,
+    });
   }
 };
 app.post("/api/auth/register", registerHandler);
@@ -280,7 +284,10 @@ const server = http.createServer(app);
 
 const io = new IOServer(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: [
+      "https://dzencode-tt-orders-products.vercel.app",
+      "http://localhost:3000",
+    ],
     credentials: true,
   },
 });
