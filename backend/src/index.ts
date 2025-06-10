@@ -18,12 +18,16 @@ const JWT_SECRET = process.env.JWT_SECRET || "supersecret";
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    // origin: "http://localhost:3000",
+    origin: [
+      "https://dzencode-tt-orders-products.vercel.app",
+      "http://localhost:3000",
+    ],
     credentials: true,
   })
 );
-app.use(express.json()); 
-app.use(express.urlencoded({ extended: true })); 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Backend Server is running!");
