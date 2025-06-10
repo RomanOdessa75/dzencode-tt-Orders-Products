@@ -8,8 +8,8 @@
 ## Features
 
 - Регистрация и авторизация пользователей (JWT, cookies)
-- CRUD для заказов и продуктов
-- График по типам продуктов (Recharts, web worker)
+- CRUD для заказов и продуктов (Optimistic Update, web worker)
+- График по типам продуктов (Recharts)
 - Валидация форм (Zod)
 - Защита приватных роутов (SSR + cookies)
 - Локализация (i18n)
